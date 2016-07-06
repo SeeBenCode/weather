@@ -5,6 +5,21 @@ $.getJSON(url, function(data){
 		var tempHigh=data.daily.data.temperatureMax;
     }
  );
+
+function getForecast(){
+	var forecastHTML="<table class='table table-striped'>";
+   	forecastHTML+="<th>Day</th><th>High</th><th>Low</th>";
+	forecastHTML+="<tr><td> Day 1</td><td> Day's High </td><td> Day's Low</td></tr>"; 
+	forecastHTML+="<tr><td> Day 2</td><td> Day's High </td><td> Day's Low</td></tr>";
+	forecastHTML+="<tr><td> Day 3</td><td> Day's High </td><td> Day's Low</td></tr>";  
+	forecastHTML+="<tr><td> Day 4</td><td> Day's High </td><td> Day's Low</td></tr>"; 
+	forecastHTML+="<tr><td> Day 5</td><td> Day's High </td><td> Day's Low</td></tr>"; 
+	forecastHTML+="</table>";
+
+	var findIdForForecast=document.getElementById("forecast");
+	findIdForForecast.innerHTML=forecastHTML;
+}
+
   
   /*"daily": {
     "summary": "No precipitation throughout the week, with temperatures rising to 68\u00b0F tomorrow.",

@@ -3,12 +3,21 @@
 <title>
 
 </title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
 </head>
 <body>
 
 Enter your zipcode. <input type="text" id="field"><button type="submit" id="submit">Submit</button><br>
 Please use my current location. <button type="button" id="button" onclick="">Find me!</button><br>
-Use my Facebook address.<button type="button" id="button" onclick="myFacebookLogin()">Let's hit up Facebook!</button>
+Use my Facebook address.<button type="button" id="button" onclick="myFacebookLogin()">Let's hit up Facebook!</button><br>
+<button type="button" id="button" onclick="getForecast()">Get Forecast</button>
+<div id="forecast"></div>
 
 <script>
   window.fbAsyncInit = function() {
@@ -34,5 +43,6 @@ Use my Facebook address.<button type="button" id="button" onclick="myFacebookLog
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script src="weather.js"></script>
+<script src="weather.js"></script><script src="weather.js"></script>
+<script src="app.js"></script>
 </body>
