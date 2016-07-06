@@ -3,17 +3,20 @@
 function getLocation(){
 	var url = "http://ip-api.com/json";
 	$.getJSON(url, function(data){
-		console.log(data.lon); //var longitude=
-		console.log(data.lat); //var latitude=
+		var longitude=data.lon; 
+		var latitude=data.lat; 
     	}
  	);
 }
 
-function getLocationWithAddress(){
-	var url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyA8ni_waYhrCLb5z_hhZfpgvGx-mCns9kA";
-	$.getJSON(url, function(data){
-		console.log(data); //var longitude=
-		//.log(data.geometry.lat); //var latitude=
+function getLocationWithZip(){
+	var url = "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:"+53212+"&key=AIzaSyAPap3f9CMf1Ad6Umm9LisnDJ_8dGj0jVU";
+	$.getJSON(url, function(results){
+		var latitude=results.results[0].geometry.location.lat;
+		var longitude=results.results[0].geometry.location.lng;
+		var longitude=results.results[0].geometry.location.lng;
+		console.log(results.results[0].geometry.location.lat);
+		console.log(results.results[0].geometry.location.lng);
     	}
  	);
 }
