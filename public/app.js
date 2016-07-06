@@ -1,10 +1,4 @@
 "use strict";
-var url = "https://api.forecast.io/forecast/3b14fbcdc2580c3f452d00c396be6641/37.8267,-122.423";
-$.getJSON(url, function(data){
-		var tempLow= data.daily.data.temperatureMin;
-		var tempHigh=data.daily.data.temperatureMax;
-    }
- );
 
 function getLocation(){
 	var url = "http://ip-api.com/json";
