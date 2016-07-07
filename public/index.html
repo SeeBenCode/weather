@@ -13,8 +13,8 @@
 </head>
 <body>
 
-Enter your zipcode. <input type="text" id="field"><button type="submit" id="submit" onclick="getLocationWithZip()">Submit</button><br>
-Please use my current location. <button type="button" id="ip" onclick="getLocation()">Find me!</button><br>
+Enter your zipcode. <input type="text" id="field"><button type="submit" id="submit" onclick="getLocationFromZip()">Submit</button><br>
+Please use my current location. <button type="button" id="ip" onclick="getLocationFromIP(getWeather)">Find me!</button><br>
 Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookLogin()">Let's hit up Facebook!</button><br>
 <button type="button" id="button" onclick="getCityState()">Get zip</button>
 <button type="button" id="button" onclick="getForecast()">Get Forecast</button>
@@ -42,10 +42,13 @@ Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookL
 
 }
 
-function getCityState(){FB.api("/me?fields=mailing-address", function(response) {
-  console.log(response);
+function getCityState(){FB.api("/me?fields=location", function(response) {
+  console.log(response.location.name);
     if(response && !response.error){
-  console.log(response);
+  //I can see the city and state but I can't get to it!
+
+  //var cityState=location.location.name;
+  //console.log(cityState);
 }
 });
 }

@@ -1,19 +1,22 @@
 "use strict";
 
-function getLocation(){
+function getLocationFromIP(callback){
 	var url = "http://ip-api.com/json";
 	$.getJSON(url, function(data){
-		var longitude=data.lon; 
-		var latitude=data.lat; 
-    	}
- 	);
+		callback(data.lat,data.lon);
+	});
 }
 
-function getLocationWithZip(){
+function getWeather(latitude,longitude){
+	$.getJSON ("/weather?latitude="+latitude+"&longitude="+longitude,function(data){
+		console.log(data);
+	});
+}
+
+function getLocationFromZip(){
 	var url = "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:"+53212+"&key=AIzaSyAPap3f9CMf1Ad6Umm9LisnDJ_8dGj0jVU";
 	$.getJSON(url, function(results){
 		var latitude=results.results[0].geometry.location.lat;
-		var longitude=results.results[0].geometry.location.lng;
 		var longitude=results.results[0].geometry.location.lng;
 		console.log(results.results[0].geometry.location.lat);
 		console.log(results.results[0].geometry.location.lng);
@@ -22,6 +25,8 @@ function getLocationWithZip(){
 }
 
 function getForecast(){
+	//https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
+
 	var forecastHTML="<table class='table table-striped'>";
    	forecastHTML+="<th>Day</th><th>High</th><th>Low</th>";
 	forecastHTML+="<tr><td> Day 1</td><td> Day's High </td><td> Day's Low</td></tr>"; 
@@ -35,7 +40,7 @@ function getForecast(){
 	findIdForForecast.innerHTML=forecastHTML;
 }
 
-getLocation();
+//getLocation();
 	/*var zip=document.getElementById("field").value;
 	var ipLocation=document.getElementById("ip").value;
 	var fbLocation=document.getElementById("facebook").value;*/
