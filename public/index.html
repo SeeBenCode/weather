@@ -14,10 +14,10 @@
 <body>
 
 Enter your zipcode. <input type="text" id="field"><button type="submit" id="submit" onclick="getLocationFromZip()">Submit</button><br>
-Please use my current location. <button type="button" id="ip" onclick="getLocationFromIP(getWeather)">Find me!</button><br>
+Please use my current location. <button type="button" id="ip" onclick="getLocationFromIP(partiallyApplyGetWeather(makeForecastTable))">Find me!</button><br>
 Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookLogin()">Let's hit up Facebook!</button><br>
 <button type="button" id="button" onclick="getCityState()">Get zip</button>
-<button type="button" id="button" onclick="getForecast()">Get Forecast</button>
+<button type="button" id="button" onclick="makeForecastTable()">Get Forecast</button>
 <div id="forecast"></div>
 
 <script>

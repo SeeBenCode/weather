@@ -29,4 +29,9 @@ CREATE TABLE post (
 FROM profile
 WHERE email='test@test.com'; i want to find test@test.com
 WHERE id > 5 AND email='test@test.com';
+MVC pattern --model view controller v=page c=server m=database
+
+
+
+
 */
