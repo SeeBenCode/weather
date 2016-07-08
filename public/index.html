@@ -13,11 +13,12 @@
 </head>
 <body>
 
-Enter your zipcode. <input type="text" id="field"><button type="submit" id="submit" onclick="getLocationFromZip()">Submit</button><br>
-Please use my current location. <button type="button" id="ip" onclick="getLocationFromIP(partiallyApplyGetWeather(makeForecastTable))">Find me!</button><br>
-Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookLogin()">Let's hit up Facebook!</button><br>
-<button type="button" id="button" onclick="getCityState()">Get zip</button>
-<button type="button" id="button" onclick="makeForecastTable()">Get Forecast</button>
+Enter your zipcode. <input type="text" id="zip"><button type="submit" id="submit" onclick="getLocationFromZip(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button><br>
+
+Please use my current location. <button type="button" id="ip" onclick="getLocationFromIP(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button><br>
+
+Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookLogin()">Log In With Facebook</button><button type="button" id="facebook" onclick="myFacebookLogin(getLocationFromFacebook(getLatLongFromCity))">Get Forecast</button>
+
 <div id="forecast"></div>
 
 <script>
@@ -39,10 +40,10 @@ Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookL
 
   function myFacebookLogin() {
   FB.login(function(){}, {scope: 'user_location'});
-
 }
 
 function getCityState(){FB.api("/me?fields=location", function(response) {
+  var cityState= response.location.name;
   console.log(response.location.name);
     if(response && !response.error){
   //I can see the city and state but I can't get to it!
@@ -58,3 +59,5 @@ function getCityState(){FB.api("/me?fields=location", function(response) {
 <script src="weather.js"></script>
 <script src="app.js"></script>
 </body>
+
+

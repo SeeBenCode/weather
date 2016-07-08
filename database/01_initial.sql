@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS profile;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS location_query;
+DROP TABLE IF EXISTS forecast;
 --this will delete everything if it already exists and recreate. 
 
 
-CREATE TABLE profile(
+/*CREATE TABLE profile(
 	id 			serial PRIMARY KEY,
 	username	text,
 	email		text --last line of a table doesn't need comma
@@ -19,6 +19,28 @@ CREATE TABLE post (
 	CONSTRAINT fk_post_to_profile-- name of constraint, like a variable it can be anything
 		FOREIGN KEY (profile_id)--(the name of the column that holds our foreign key)
 		REFERENCES profile(id)-- (table)(name of the column for our primary key)
+);*/
+
+CREATE TABLE location_query(
+	id 			serial PRIMARY KEY,
+	latitude	numeric,
+	longitude	numeric,
+	query_date	timestamp with time zone NOT NULL
+
+);
+
+CREATE TABLE forecast(
+	id          	serial PRIMARY KEY,
+	summary  		text,
+	high_temp		integer,
+	low_temp		integer,
+	precip_chance	numeric,
+	location_query_id		integer, 
+
+
+	CONSTRAINT fk_forecast_to_location_query-- name of constraint, like a variable it can be anything
+		FOREIGN KEY (location_query_id)--(the name of the column that holds our foreign key)
+		REFERENCES location_query(id)
 );
 
 ---SELECT * FROM profile;  this is the GET syntax for SQL
