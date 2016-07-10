@@ -1,63 +1,117 @@
 <!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-<title>
+  <title>
+    Weather Forecast Project
+  </title>
 
-</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Syncopate">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+
 
 </head>
+
 <body>
 
-Enter your zipcode. <input type="text" id="zip"><button type="submit" id="submit" onclick="getLocationFromZip(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button><br>
+  <div id="body" >
+    <div id="title" class="container-fluid">
+      <h1>
+      <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+      <span id="dorothy">Dorothy,</span> Beware!
+      <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+      </h1>
+      <h3>Your Five Day Weather Forecaster</h3>
+    </div>
+    <br>
+    <div id="location" class="col-md-12" class="row">
 
-Please use my current location. <button type="button" id="ip" onclick="getLocationFromIP(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button><br>
 
-Use my Facebook address.<button type="button" id="facebook" onclick="myFacebookLogin()">Log In With Facebook</button><button type="button" id="facebook" onclick="myFacebookLogin(getLocationFromFacebook(getLatLongFromCity))">Get Forecast</button>
+    <div class="row">
+      <div class="col-md-3" class="left">
+        <h2>Let's Get Your Coordinates!</h2> 
+        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </div>
+      <div class="col-md-3">
+        <p>I'll enter my zipcode.</p> 
+        <input type="text" id="zip">
+        <br>
+        <button type="submit" id="submit" onclick="getLocationFromZip(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button>
+        <br>
+      </div>
+      <div class="col-md-3">
+        <p>Please use my current location.</p>
+        <button type="button" id="ip" onclick="getLocationFromIP(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button>
+        <br>
+      </div>
+      <div class="col-md-3">
+        <p>Use my Facebook profile address.</p>
+        <button type="button" id="facebook" onclick="myFacebookLogin()">Log In With Facebook</button>
+        <button type="button" onclick="getLocationFromFacebook(partiallyApplyGetLLFromCity(partiallyApplyGetWeather(makeForecastTable)))">Get Forecast</button>
+        <br>
+      </div>
+    </div>
 
-<div id="forecast"></div>
+    <div class="row">
+      <div class="col-md-3" class="left" id="userweather">
+        <h2>See Your Forecast Here</h2> 
+        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </div>
+    <div id="forecast" class="col-md-9"></div>
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '241801789540593',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
+          </div>
+        </div>
+      </div>
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "http://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
 
-  function myFacebookLogin() {
-  FB.login(function(){}, {scope: 'user_location'});
-}
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '241801789540593',
+            xfbml      : true,
+            version    : 'v2.6'
+          });
+        };
 
-function getCityState(){FB.api("/me?fields=location", function(response) {
-  var cityState= response.location.name;
-  console.log(response.location.name);
-    if(response && !response.error){
+        (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "http://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+        function myFacebookLogin() {
+          FB.login(function(){}, {scope: 'user_location'});
+        }
+
+        function getCityState(){FB.api("/me?fields=location", function(response) {
+          var cityState= response.location.name;
+          console.log(response.location.name);
+          if(response && !response.error){
   //I can see the city and state but I can't get to it!
 
   //var cityState=location.location.name;
   //console.log(cityState);
+  //<div id="pic" class="col-xs-6 col-lg-4">
+//<img src="css/lightning.jpg" alt="Lightning">
+//</div>
 }
 });
-}
+      }
 
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script src="weather.js"></script>
-<script src="app.js"></script>
-</body>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="weather.js"></script>
+    <script src="app.js"></script>
+  </body>
 
 

@@ -30,11 +30,11 @@ CREATE TABLE location_query(
 );
 
 CREATE TABLE forecast(
-	id          	serial PRIMARY KEY,
-	summary  		text,
-	high_temp		integer,
-	low_temp		integer,
-	precip_chance	numeric,
+	id          			serial PRIMARY KEY,
+	summary  				text,
+	high_temp				integer,
+	low_temp				integer,
+	precip_chance			numeric,
 	location_query_id		integer, 
 
 

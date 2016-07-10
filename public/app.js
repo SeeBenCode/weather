@@ -1,36 +1,43 @@
 "use strict";
 
-//var databaseManager = require("./database-manager.js");
-//databaseManager.saveProfile(...);
+
 
 function getLocationFromFacebook(callback){
     FB.api("/me?fields=location", function(response) {
-        var cityState= response.location.name;
         console.log(response.location.name);
+        var cityState= response.location.name;
         if(response && !response.error){
         }
+     console.log(cityState);
+     callback(cityState);
     });
-    callback(cityState)
 }
 
-function partiallyApplyGetLLFromCity(){
-    return function(){
-        getWeather(locationName);
+function partiallyApplyGetLLFromCity(callback){
+    return function(locationName){
+        getLatLongFromCity(locationName,callback);
     }
 }
 
+function partiallyApplyGetWeather(callback){
+    return function(latitude,longitude){
+        getWeather(latitude,longitude,callback);
 
-function getLatLongFromCity(locationName){
+    }()//trying to figure out the IIFE
+}
+
+
+function getLatLongFromCity(locationName,callback){
     console.log(locationName);
-    var url = "http://maps.googleapis.com/maps/api/geocode/xml?address="+locationName+"&sensor=false";
-
+    var url = "http://maps.googleapis.com/maps/api/geocode/json?address="+locationName+"&sensor=false";
     $.getJSON(url, function(results){
+        console.log(results.results[0].geometry.location.lat);
         var latitude=results.results[0].geometry.location.lat;
         var longitude=results.results[0].geometry.location.lng;
         console.log(latitude);
-        callback(latitude,longitude,callback)
+        console.log(longitude);
+        callback(latitude,longitude);
         });
-    console.log(latitude);
 }
 
 function getLocationFromIP(callback){
@@ -42,12 +49,10 @@ function getLocationFromIP(callback){
 
 function getLocationFromZip(callback){
     var zip=document.getElementById("zip").value
-    console.log(zip);
     var url = "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:"+zip+"&key=AIzaSyAPap3f9CMf1Ad6Umm9LisnDJ_8dGj0jVU";
     $.getJSON(url, function(results){
         var latitude=results.results[0].geometry.location.lat;
         var longitude=results.results[0].geometry.location.lng;
-        console.log(latitude);
         callback(latitude,longitude,callback)
         });
 }
@@ -79,7 +84,7 @@ function partiallyApplyGetWeather(callback){
 
 
 function makeForecastTable(highTemperatures,lowTemperatures){
-	var forecastHTML="<table class='table table-striped'>";
+	var forecastHTML="<table class='table table-responsive' id='table'>";
    	forecastHTML+="<th>Day</th><th>High</th><th>Low</th>";
     for(var i=0; i<5; i++){
        forecastHTML+="<tr><td> Day"+(i+1)+"</td><td>"+ highTemperatures[i] +"</td><td>"+lowTemperatures[i]+"</td></tr>"; 

@@ -1,0 +1,53 @@
+body {
+  background-color: #071e22;
+  color: white;
+  font-family: Syncopate, sans-serif;
+  font-size: 2em;
+  line-height: 1.25; }
+
+#title {
+  background-color: #1d7874;
+  background-image: url("tornado.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 60px;
+  border-bottom: solid white 10px; }
+  #title h1 {
+    font-size: 60px;
+    color: #ee2e31;
+    text-align: center; }
+  #title h3 {
+    font-family: Open Sans, sans-serif;
+    padding-bottom: 10px;
+    text-align: right; }
+
+button {
+  padding: 10px;
+  margin: 20px; }
+
+#location button {
+  background-color: #ee2e31;
+  font-family: Open Sans, sans-serif; }
+
+#dorothy {
+  color: white; }
+
+#facebook {
+  background-color: #679289; }
+
+.glyphicon {
+  color: white; }
+
+.glyphicon-arrow-right {
+  font-size: 80px;
+  color: #ee2e31;
+  text-align: center; }
+
+p {
+  font-family: Open Sans, sans-serif;
+  font-size: 2 em; }
+
+#left {
+  border-right-style: groove; }
+
+/*# sourceMappingURL=style.css.map */
