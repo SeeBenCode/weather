@@ -8,24 +8,25 @@ process.on("unhandledRejection", function(e) {
 module.exports = (function() {
   var config = {
     host: "localhost",
-    user: "serverUser",
-    password: "TristanKyreeRaja",
+    user: "weather_server",
+    password: "weather1234",
     database: "postgres"
   };
 
 var pool = new Pool(config);
   
-var saveLocationQuery = function(latitude,longitude, date) {
+var saveLocationQuery = function(latitude,longitude, date,callback) {
   pool.query(
     //format every query date to fit SQL timestamp format
     "INSERT INTO location_query" +
-    "(latitude, longitude,date)" +
-    "VALUES ($1, $2, $3);", [latitude, longitude,date], function(error, result) {//$1 etc is a place holder for the parameters- DON'T USE STRING CACOTONATION
+    "(latitude, longitude,query_date)" +
+    "VALUES ($1, $2, $3)RETURNING id;"  , [latitude, longitude,date], function(error, result) {//$1 etc is a place holder for the parameters- DON'T USE STRING CACOTONATION
         if (error) {
           return console.error(error);
         }
-        console.log(result);	//once it's done inserting the info, what do you want it to do?
+        callback(result.rows[0].id);	
     }
+
   );
 }
 
@@ -38,7 +39,7 @@ var saveForecast = function(summary,high_temp,low_temp,precip_chance,location_qu
           if (error) {
             return console.error(error);
           }
-          console.log(result);  //once it's done inserting the info, what do you want it to do?
+          //return "hello";  //once it's done inserting the info, what do you want it to do?
       }
     );
   }
@@ -61,15 +62,10 @@ pool.query(
 
 return {
   saveLocationQuery: saveLocationQuery,
-  otherFunction: otherFunction
+  saveForecast: saveForecast,
+  checkDatabase: checkDatabase
 };
-})();//this is an immediately invoked function 
+})();//this is an immediately invoked function expression
 
 
 
-
-//Somewhere else
-var databaseManager = require("./database-manager.js");
-databaseManager.saveLocationQuery(latitude,longitude,date);
-databaseManager.checkDatabase(latitude,longitude,query_date);
-databaseManager.saveForecast(summary,high_temp,low_temp,precip_chance,location_query_id)

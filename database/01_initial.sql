@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS location_query;
 DROP TABLE IF EXISTS forecast;
+DROP TABLE IF EXISTS location_query;
+
 --this will delete everything if it already exists and recreate. 
 
 
@@ -29,6 +30,8 @@ CREATE TABLE location_query(
 
 );
 
+ALTER TABLE location_query OWNER TO weather_server;
+
 CREATE TABLE forecast(
 	id          			serial PRIMARY KEY,
 	summary  				text,
@@ -42,6 +45,8 @@ CREATE TABLE forecast(
 		FOREIGN KEY (location_query_id)--(the name of the column that holds our foreign key)
 		REFERENCES location_query(id)
 );
+
+ALTER TABLE forecast OWNER TO weather_server;
 
 ---SELECT * FROM profile;  this is the GET syntax for SQL
 --SELECT first_name, last_name FROM profile; 	 only gives you these these columns

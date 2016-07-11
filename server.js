@@ -1,10 +1,15 @@
 var express=require("express");
 var app=express();
 
-//var databaseManager = require("./database-manager.js");
-//databaseManager.saveLocationQuery(latitude,longitude,date);
-//databaseManager.checkDatabase(latitude,longitude,query_date);
-//databaseManager.saveForecast(summary,high_temp,low_temp,precip_chance,location_query_id);
+//var pugOne=require("pug");
+//var pugOne =pug();
+
+//pugOne.set('view engine','pug')
+//pugOne.set('views','./views')
+//pugOne.locals.pretty= true
+
+var databaseManager = require("./database/database-manager.js");
+
 
 app.use(express.static("public"));
 app.listen(3000,function(){
@@ -31,13 +36,21 @@ function getJSON(url, callback) {// replacement $.getJSON
 
 app.get("/weather",function(request,response){
 	var url = "https://api.forecast.io/forecast/3b14fbcdc2580c3f452d00c396be6641/"+request.query.latitude+","+request.query.longitude;	
-  console.log(request);
-  getJSON(url, function(error,data){
-    //databaseManager.saveLocationQuery();
-    //databaseManager.saveForecast();
-		response.send(JSON.stringify(data));	
-	});
+    getJSON(url, function(error,data){
+      databaseManager.saveLocationQuery(request.query.latitude,request.query.longitude,"07/11/2016", function(locationID){
+        for (var i=0; i<5; i++){
+          databaseManager.saveForecast(data.daily.data[i].summary,
+          Math.round(data.daily.data[i].apparentTemperatureMax),
+          Math.round(data.daily.data[i].apparentTemperatureMin),
+          data.daily.data[i].precipProbability,
+          locationID);
+          }
+      });
+    response.send(JSON.stringify(data));  
+    }); 
 
-});
+	})
+
+
 
 

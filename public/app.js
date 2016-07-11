@@ -1,6 +1,8 @@
 "use strict";
 
-
+$(document).ready(function(){
+  $("#userweather").hide();
+});
 
 function getLocationFromFacebook(callback){
     FB.api("/me?fields=location", function(response) {
@@ -84,15 +86,17 @@ function partiallyApplyGetWeather(callback){
 
 
 function makeForecastTable(highTemperatures,lowTemperatures){
+    $("#userweather").show();
 	var forecastHTML="<table class='table table-responsive' id='table'>";
    	forecastHTML+="<th style='background-color:#679289'>Day</th><th style='background-color:#679289'>High</th><th style='background-color:#679289'>Low</th>";
     for(var i=0; i<5; i++){
-       forecastHTML+="<tr><td> Day"+(i+1)+"</td><td>"+ Math.round(highTemperatures[i]) +"&#8457</td><td>"+Math.round(lowTemperatures[i])+"&#8457</td></tr>"; 
+       forecastHTML+="<tr><td> Day"+(i+1)+"</td><td>"+ Math.round(highTemperatures[i]) +"&deg</td><td>"+Math.round(lowTemperatures[i])+"&deg</td></tr>"; 
     }
     forecastHTML+="</table>";
 
-    var findIdForForecast=document.getElementById("forecast");
-    findIdForForecast.innerHTML=forecastHTML;
+    $("#forecast").html(forecastHTML);
+    //var findIdForForecast=document.getElementById("forecast");
+    //findIdForForecast.innerHTML=forecastHTML;
 }
 
 /*
@@ -112,5 +116,7 @@ this.function=function(callback){
 
 
 whatever comes after that has a this
+
+ .css,  .attr/.val, .on, .ajax/.get/.load
 
 */

@@ -1,31 +1,26 @@
-<!DOCTYPE html>
+doctype html
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<head>
-  <title>
-    Weather Forecast Project
-  </title>
+meta (name="viewport" content="width=device-width, initial-scale=1")
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+head
+  title Weather Forecast Project
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  link (rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous")
 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  link (rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous")
 
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Syncopate">
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  link (rel="stylesheet" type="text/css" href="css/style.css")
+  
+  link (rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Syncopate")
+
+  link (rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans")
 
 
-</head>
-
-<body>
-
-  <div id="body" >
-    <div id="title" class="container-fluid">
-      <h1>
-      <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+body
+  div#body
+    div#title.container-fluid
+      h1
+        span.glyphicon glyphicon-option-horizontal(aria-hidden="true")
       <span id="dorothy">Dorothy,</span> Beware!
       <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
       </h1>
@@ -41,23 +36,18 @@
         <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
       </div>
       <div class="col-md-3">
-      <img src="zip.png" alt="zip code">
         <p>I'll enter my zipcode.</p> 
-
         <input type="text" id="zip" style="background-color: #071e22;">
         <br>
-
         <button type="submit" id="submit" onclick="getLocationFromZip(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button>
         <br>
       </div>
       <div class="col-md-3">
-      <img src="find.png" alt="Find me!">
         <p>Please use my current location.</p>
         <button type="button" id="ip" onclick="getLocationFromIP(partiallyApplyGetWeather(makeForecastTable))">Get Forecast</button>
         <br>
       </div>
       <div class="col-md-3">
-      <img src="facebook.png" alt="zip code">
         <p>Let's use my Facebook profile address.</p>
         <button type="button" id="facebook" onclick="myFacebookLogin()">Log In With Facebook</button>
         <button type="button" onclick="getLocationFromFacebook(partiallyApplyGetLLFromCity(partiallyApplyGetWeather(makeForecastTable)))">Get Forecast</button>
@@ -67,7 +57,7 @@
 
     <div class="row">
       <div class="col-md-3" class="left" id="userweather">
-        <h2>Here's Your Forecast!</h2> 
+        <h2>See Your Forecast Here.</h2> 
         <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
       </div>
     <div id="forecast" class="col-md-9"></div>
