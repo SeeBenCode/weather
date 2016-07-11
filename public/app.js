@@ -85,9 +85,9 @@ function partiallyApplyGetWeather(callback){
 
 function makeForecastTable(highTemperatures,lowTemperatures){
 	var forecastHTML="<table class='table table-responsive' id='table'>";
-   	forecastHTML+="<th>Day</th><th>High</th><th>Low</th>";
+   	forecastHTML+="<th style='background-color:#679289'>Day</th><th style='background-color:#679289'>High</th><th style='background-color:#679289'>Low</th>";
     for(var i=0; i<5; i++){
-       forecastHTML+="<tr><td> Day"+(i+1)+"</td><td>"+ highTemperatures[i] +"</td><td>"+lowTemperatures[i]+"</td></tr>"; 
+       forecastHTML+="<tr><td> Day"+(i+1)+"</td><td>"+ Math.round(highTemperatures[i]) +"&#8457</td><td>"+Math.round(lowTemperatures[i])+"&#8457</td></tr>"; 
     }
     forecastHTML+="</table>";
 
